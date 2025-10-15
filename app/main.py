@@ -565,13 +565,6 @@ def create_streamlit_app():
     # Main input section
     st.markdown('<div class="input-container">', unsafe_allow_html=True)
     
-    # API Key status indicator
-    api_key = os.getenv('GROQ_API_KEY', '').strip()
-    if not api_key or api_key == 'your_groq_api_key_here':
-        st.info("🔧 **Demo Mode**: Running without API key. This demo shows the UI and generates sample emails.")
-    else:
-        st.success("✅ **Live Mode**: API key configured. Full functionality enabled.")
-    
     # URL Input
     st.markdown("### 🔗 Enter Job Posting URL")
     url_input = st.text_input(
@@ -622,7 +615,6 @@ def create_streamlit_app():
                 mock_email = get_mock_email_response(url_input)
                 st.code(mock_email, language='text')
                 
-                st.info("💡 **Note**: This is a demo email. Connect your Groq API key in `.env` for real job analysis and personalized emails.")
                 st.markdown('</div>', unsafe_allow_html=True)
                 
             else:
