@@ -118,6 +118,37 @@ Create an `app/.env` file with:
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
+## 🚀 Deployment
+
+### Recommended Platforms:
+
+#### 1. **Streamlit Community Cloud** (Free & Easy)
+1. Visit [share.streamlit.io](https://share.streamlit.io/)
+2. Connect GitHub and select this repository
+3. Set main file path: `app/main.py`
+4. Add `GROQ_API_KEY` in secrets
+5. Deploy!
+
+#### 2. **Railway** (Reliable)
+1. Visit [railway.app](https://railway.app/)
+2. Deploy from GitHub repo
+3. Add environment variables
+4. Automatic deployment with `railway.json`
+
+#### 3. **Render** (Free Tier)
+1. Connect GitHub repo at [render.com](https://render.com/)
+2. Runtime: Python 3
+3. Build: `pip install -r requirements.txt`
+4. Start: `streamlit run app/main.py --server.port $PORT --server.headless true`
+
+#### 4. **Docker Deployment**
+```bash
+docker build -t cold-email-ai .
+docker run -p 8501:8501 -e GROQ_API_KEY=your_key cold-email-ai
+```
+
+> ⚠️ **Note**: Avoid Vercel/Netlify for Streamlit apps. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed guide.
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
