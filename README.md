@@ -1,21 +1,31 @@
-# 🤖 Cold Email Generator AI Agent
+# 🗣️ Voice AI Agent - Cold Email Generator
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)](https://streamlit.io/)
 [![LangChain](https://img.shields.io/badge/LangChain-0.3+-green.svg)](https://python.langchain.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-An intelligent AI-powered application that generates personalized cold emails by analyzing job postings and matching them with your portfolio. Built with LangChain, Streamlit, and powered by Groq's lightning-fast LLM inference.
+🎙️ **Voice-First AI Agent** that transforms spoken ideas into professional cold emails. Upload audio, speak your thoughts, or type your message - our AI analyzes job opportunities and generates personalized outreach emails that get responses.
 
-## 🌟 Features
+## 🌟 Key Features
 
+### 🎧 Voice-First Experience
+- **🎙️ Audio Upload**: Support for WAV, MP3, M4A, OGG, FLAC, AAC files (up to 25MB)
+- **📝 Auto Transcription**: Intelligent speech-to-text conversion (demo mode available)
+- **🔴 Voice Recording**: Browser-based recording (experimental feature)
+- **✍️ Manual Input**: Traditional text input and URL analysis
+
+### 🧠 Intelligent Processing
 - **🔍 Smart Job Analysis**: Automatically scrapes and analyzes job postings from URLs
-- **🎯 Personalized Matching**: Matches job requirements with your portfolio using vector similarity search
-- **✍️ AI-Powered Writing**: Generates compelling, personalized cold emails using advanced LLMs
+- **🎯 Context-Aware Matching**: Matches spoken requirements with your portfolio using vector similarity
+- **✨ AI-Powered Writing**: Generates compelling, personalized cold emails from voice or text input
 - **⚡ Lightning Fast**: Powered by Groq's ultra-fast inference engine
-- **📊 Portfolio Management**: Dynamic portfolio loading and querying with ChromaDB
-- **🎨 Modern UI**: Clean, intuitive Streamlit interface
-- **🔒 Secure**: Environment-based API key management
+
+### 🎨 Modern Interface
+- **🌟 Apple iOS-Inspired Glass UI**: Stunning glass morphism design with 3D effects
+- **📱 Voice-First Layout**: Intuitive tabs for audio/voice and traditional text input
+- **🎭 Smooth Animations**: Fluid transitions and hover effects throughout
+- **🔒 Secure**: Environment-based API key management with demo mode fallback
 
 ## 🚀 Quick Start
 
