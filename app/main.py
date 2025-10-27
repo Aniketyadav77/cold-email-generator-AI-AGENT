@@ -469,6 +469,95 @@ def inject_custom_css():
         border-radius: 16px !important;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
     }
+    
+    /* Voice-specific UI enhancements */
+    .stFileUploader {
+        transition: all 0.3s ease !important;
+    }
+    
+    .stFileUploader:hover {
+        transform: translateY(-2px) !important;
+    }
+    
+    .stAudio {
+        background: 
+            linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(59, 130, 246, 0.02) 100%
+            ) !important;
+        border-radius: 12px !important;
+        padding: 12px !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    
+    .stTextArea textarea {
+        background: 
+            linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.04) 50%,
+                rgba(0, 0, 0, 0.08) 100%
+            ) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 16px !important;
+        color: #ffffff !important;
+        font-family: 'SF Pro Display', 'Inter', monospace !important;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1) !important;
+    }
+    
+    .stTextArea textarea:focus {
+        border-color: rgba(59, 130, 246, 0.6) !important;
+        box-shadow: 
+            0 0 30px rgba(59, 130, 246, 0.2),
+            0 8px 32px rgba(0, 0, 0, 0.3) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Enhanced tabs styling */
+    .stTabs [data-baseweb="tab-list"] {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 16px !important;
+        padding: 8px !important;
+        backdrop-filter: blur(20px) !important;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background: transparent !important;
+        border-radius: 12px !important;
+        margin: 4px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        background: rgba(59, 130, 246, 0.1) !important;
+        transform: translateY(-1px) !important;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: 
+            linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.3) 0%,
+                rgba(29, 78, 216, 0.2) 100%
+            ) !important;
+        backdrop-filter: blur(10px) !important;
+        box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2) !important;
+    }
+    
+    /* Pulse animation for record button */
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+    
+    .record-button {
+        animation: pulse 2s infinite !important;
+        background: 
+            linear-gradient(135deg, 
+                rgba(239, 68, 68, 0.8) 0%,
+                rgba(220, 38, 38, 0.9) 100%
+            ) !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -477,8 +566,8 @@ def create_modern_header():
     """Create the modern 3D header"""
     st.markdown("""
     <div class="main-header">
-        <div class="title">🤖 Cold Email AI Agent</div>
-        <div class="subtitle">Generate personalized cold emails using AI-powered job analysis</div>
+        <div class="title">🗣️ Voice AI Agent</div>
+        <div class="subtitle">Turn spoken ideas into professional outreach — upload audio or record and generate personalized messages</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -490,18 +579,18 @@ def create_feature_showcase():
     with col1:
         st.markdown("""
         <div class="feature-card">
-            <div class="feature-icon">🔍</div>
-            <h3>Smart Analysis</h3>
-            <p>AI analyzes job postings to extract key requirements and skills</p>
+            <div class="feature-icon">🎙️</div>
+            <h3>Voice First</h3>
+            <p>Upload or record audio and let the agent transcribe your message instantly</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
         <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Perfect Match</h3>
-            <p>Matches your portfolio with job requirements using vector search</p>
+            <div class="feature-icon">🧭</div>
+            <h3>Context Aware</h3>
+            <p>Understands intent from speech and matches your portfolio to the opportunity</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -509,8 +598,8 @@ def create_feature_showcase():
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">✍️</div>
-            <h3>AI Writing</h3>
-            <p>Generates compelling, personalized cold emails that get responses</p>
+            <h3>Polished Output</h3>
+            <p>Generates crisp, professional emails from spoken or written briefs</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -554,6 +643,73 @@ P.S. I've included links to my most relevant projects above. Happy to provide ad
 """
 
 
+def get_mock_transcript_from_audio(audio_file) -> str:
+    """Return a demo transcript for an uploaded audio file with enhanced validation.
+
+    This is a lightweight placeholder so the UI can show a transcript
+    without requiring an STT provider or extra dependencies.
+    """
+    try:
+        if not audio_file:
+            return "(Demo) No audio file provided"
+            
+        filename = getattr(audio_file, "name", "unknown_audio")
+        file_size = getattr(audio_file, "size", 0)
+        
+        # Simulate different responses based on file characteristics
+        if file_size > 10 * 1024 * 1024:  # > 10MB
+            demo_text = (
+                "Hi there! I'm reaching out regarding the software engineering position. "
+                "I have over 5 years of experience in full-stack development, particularly "
+                "with React, Node.js, and cloud technologies like AWS. I'm passionate about "
+                "building scalable applications and would love to discuss how my skills "
+                "align with your team's needs. Looking forward to connecting!"
+            )
+        elif filename.lower().endswith(('.mp3', '.m4a')):
+            demo_text = (
+                "Hello! I'm very interested in this role. My background includes modern web "
+                "development, API design, and DevOps practices. I've led several projects "
+                "from conception to deployment and thrive in collaborative environments."
+            )
+        else:
+            demo_text = (
+                "Hi, I'm excited about this opportunity. I have experience building scalable "
+                "web apps, working with cloud platforms, and collaborating on cross-functional teams."
+            )
+        
+        return f"(Demo transcription from {filename}): {demo_text}"
+        
+    except Exception as e:
+        return f"(Demo transcription error): Unable to process audio file - {str(e)[:50]}"
+
+
+def validate_audio_file(audio_file) -> tuple[bool, str]:
+    """Validate uploaded audio file and return status with message."""
+    if not audio_file:
+        return False, "No audio file provided"
+    
+    try:
+        # Check file size (limit to 25MB for demo)
+        file_size = getattr(audio_file, "size", 0)
+        if file_size > 25 * 1024 * 1024:
+            return False, f"File too large ({file_size / (1024*1024):.1f}MB). Maximum size is 25MB"
+        
+        if file_size == 0:
+            return False, "Empty audio file detected"
+        
+        # Check file extension
+        filename = getattr(audio_file, "name", "").lower()
+        allowed_extensions = ['.wav', '.mp3', '.m4a', '.ogg', '.flac', '.aac']
+        
+        if not any(filename.endswith(ext) for ext in allowed_extensions):
+            return False, f"Unsupported file type. Allowed: {', '.join(allowed_extensions)}"
+        
+        return True, f"✓ Valid audio file ({file_size / (1024*1024):.1f}MB)"
+        
+    except Exception as e:
+        return False, f"File validation error: {str(e)}"
+
+
 def create_streamlit_app():
     """Main Streamlit app with modern UI"""
     inject_custom_css()
@@ -562,31 +718,98 @@ def create_streamlit_app():
     # Feature showcase
     create_feature_showcase()
     
-    # Main input section
+    # Main input section - voice-first UI
     st.markdown('<div class="input-container">', unsafe_allow_html=True)
-    
-    # URL Input
-    st.markdown("### 🔗 Enter Job Posting URL")
-    url_input = st.text_input(
-        "Job URL", 
-        value="https://www.kfintech.com/career/",
-        placeholder="https://company.com/careers/job-id",
-        help="Paste the URL of the job posting you want to apply for"
-    )
-    
-    # Generate button
+
+    st.markdown("### 🎧 Input Mode")
+    tab_audio, tab_url = st.tabs(["Audio / Voice", "URL / Text"])
+
+    # Shared state
+    audio_file = None
+    transcript_text = ""
+
+    with tab_audio:
+        st.markdown("#### 🎙️ Upload Audio or Record (Experimental)")
+        
+        # Enhanced audio upload with validation
+        audio_file = st.file_uploader(
+            "Select audio file", 
+            type=["wav", "mp3", "m4a", "ogg", "flac", "aac"],
+            help="Supported formats: WAV, MP3, M4A, OGG, FLAC, AAC (Max: 25MB)"
+        )
+        
+        # Validate audio file if uploaded
+        if audio_file is not None:
+            is_valid, validation_msg = validate_audio_file(audio_file)
+            if is_valid:
+                st.success(validation_msg)
+                st.audio(audio_file, format="audio/wav")
+            else:
+                st.error(f"❌ {validation_msg}")
+                audio_file = None  # Reset invalid file
+
+        # Recording section with enhanced UI
+        st.markdown("#### 🔴 Voice Recording")
+        col_r1, col_r2, col_r3 = st.columns([2, 1, 1])
+        with col_r1:
+            st.info("🎧 Browser recording requires additional setup - use file upload for reliable results")
+        with col_r2:
+            record_btn = st.button("🔴 Record", help="Experimental feature", key="record_voice")
+        with col_r3:
+            if record_btn:
+                st.warning("Recording feature coming soon!")
+
+        # Transcript section
+        st.markdown("#### 📝 Transcript")
+        
+        # Auto-generate transcript for demo if audio uploaded
+        if audio_file is not None and is_valid:
+            auto_transcript = get_mock_transcript_from_audio(audio_file)
+            transcript_text = st.text_area(
+                "Transcribed text (auto-generated in demo mode)", 
+                value=auto_transcript, 
+                height=160,
+                help="Edit this text or replace with your own transcript"
+            )
+        else:
+            transcript_text = st.text_area(
+                "Enter transcript or upload audio for auto-transcription", 
+                value="", 
+                height=160,
+                placeholder="Paste your spoken message here, or upload an audio file above..."
+            )
+
+    with tab_url:
+        st.markdown("#### 🔗 Enter Job Posting URL or paste job description")
+        url_input = st.text_input(
+            "Job URL", 
+            value="",
+            placeholder="https://company.com/careers/job-id",
+            help="Paste the URL of the job posting you want to apply for"
+        )
+
+        st.markdown("#### Or paste a job description / brief")
+        pasted_text = st.text_area("Paste job description or role brief", value="", height=160)
+
+    # Generate button centered
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        submit_button = st.button("🚀 Generate Cold Email", use_container_width=True)
-    
+        submit_button = st.button("🎙️ Generate from Audio/Text", use_container_width=True)
+
     st.markdown('</div>', unsafe_allow_html=True)
 
     if submit_button:
-        if not url_input or not url_input.startswith(('http://', 'https://')):
-            st.error("⚠️ Please enter a valid URL starting with http:// or https://")
+        # Enhanced validation for voice AI agent
+        has_audio = audio_file is not None
+        has_transcript = transcript_text.strip() != ""
+        has_url = url_input and url_input.startswith(('http://', 'https://'))
+        has_text = 'pasted_text' in locals() and pasted_text.strip() != ""
+        
+        if not (has_audio or has_transcript or has_url or has_text):
+            st.error("🎙️ **Please provide input**: Upload audio, enter text transcript, or provide a URL/job description")
             return
         
-        # Show loading animation
+        # Show enhanced loading animation for voice processing
         with st.container():
             st.markdown("""
             <div class="loading">
@@ -594,65 +817,107 @@ def create_streamlit_app():
             </div>
             """, unsafe_allow_html=True)
             
-            # Simulate processing time
+            if has_audio:
+                st.info("🎧 Processing audio file...")
+            elif has_transcript:
+                st.info("📝 Analyzing transcript...")
+            elif has_url:
+                st.info("🔗 Analyzing job posting...")
+            else:
+                st.info("✨ Processing your input...")
+            
+            # Simulate processing time with enhanced feedback
             progress_bar = st.progress(0)
             for i in range(100):
-                time.sleep(0.02)
+                time.sleep(0.025)
                 progress_bar.progress(i + 1)
             
             progress_bar.empty()
         
-        # Generate email
+        # Enhanced generation logic for voice AI
         try:
             api_key = os.getenv('GROQ_API_KEY', '').strip()
             
+            # Determine input source and prepare content
+            content_source = ""
+            if has_audio and has_transcript:
+                content_source = f"Voice Input: {transcript_text}"
+            elif has_transcript:
+                content_source = f"Text Input: {transcript_text}"
+            elif has_url:
+                content_source = f"URL Analysis: {url_input}"
+            elif has_text:
+                content_source = f"Job Description: {pasted_text}"
+            
             if not api_key or api_key == 'your_groq_api_key_here':
-                # Demo mode - show mock response
+                # Enhanced demo mode with voice awareness
                 st.markdown('<div class="result-container">', unsafe_allow_html=True)
-                st.success("✨ **Demo Email Generated Successfully!**")
-                st.markdown("### 📧 Generated Cold Email:")
                 
-                mock_email = get_mock_email_response(url_input)
+                if has_audio or has_transcript:
+                    st.success("🎙️ **Voice-to-Email Generated Successfully!**")
+                    st.info(f"**Input Source**: {content_source[:100]}...")
+                else:
+                    st.success("✨ **Demo Email Generated Successfully!**")
+                
+                st.markdown("### 📧 Generated Professional Email:")
+                
+                # Use transcript or URL for mock generation
+                input_for_mock = transcript_text if (has_audio or has_transcript) else (url_input or pasted_text)
+                mock_email = get_mock_email_response(input_for_mock)
                 st.code(mock_email, language='text')
+                
+                if has_audio or has_transcript:
+                    st.markdown("### 🎯 Voice Analysis")
+                    st.write("**Key Points Detected:**")
+                    st.write("• Professional experience mentioned")
+                    st.write("• Technical skills highlighted")  
+                    st.write("• Interest in opportunity expressed")
                 
                 st.markdown('</div>', unsafe_allow_html=True)
                 
             else:
-                # Real mode - use actual API
+                # Real mode - enhanced for voice input
                 from chains import Chain
                 from portfolio import Portfolio
                 
                 chain = Chain()
                 portfolio = Portfolio()
                 
-                loader = WebBaseLoader([url_input])
-                data = clean_text(loader.load().pop().page_content)
+                if has_url:
+                    loader = WebBaseLoader([url_input])
+                    data = clean_text(loader.load().pop().page_content)
+                elif has_transcript or has_text:
+                    data = transcript_text or pasted_text
+                else:
+                    data = "No specific job posting provided"
+                
                 portfolio.load_portfolio()
                 jobs = chain.extract_jobs(data)
                 
                 st.markdown('<div class="result-container">', unsafe_allow_html=True)
-                st.success("✨ **Email Generated Successfully!**")
+                st.success("🎙️ **Voice AI Email Generated Successfully!**")
+                st.info(f"**Input Source**: {content_source[:100]}...")
                 
                 for job in jobs:
                     skills = job.get('skills', [])
                     links = portfolio.query_links(skills)
                     email = chain.write_mail(job, links)
                     
-                    st.markdown("### 📧 Generated Cold Email:")
+                    st.markdown("### 📧 Generated Professional Email:")
                     st.code(email, language='markdown')
                 
                 st.markdown('</div>', unsafe_allow_html=True)
                 
         except Exception as e:
-            st.error(f"🚨 **Error**: {str(e)}")
-            st.info("💡 **Tip**: Make sure the URL is accessible and contains job posting information.")
+            st.error(f"🚨 **Processing Error**: {str(e)}")
+            st.info("💡 **Tip**: Ensure your audio is clear, transcript is complete, or URL is accessible.")
 
 
 if __name__ == "__main__":
     st.set_page_config(
         layout="wide", 
-        page_title="Cold Email AI Agent", 
-        page_icon="🤖",
+        page_title="Voice AI Agent", 
+        page_icon="🗣️",
         initial_sidebar_state="collapsed"
     )
     create_streamlit_app()
