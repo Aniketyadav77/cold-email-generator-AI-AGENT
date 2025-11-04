@@ -16,19 +16,29 @@ def inject_custom_css():
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
-    /* Global Styling - Apple Dark Theme */
-    .main {
-        background: linear-gradient(145deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #000000 100%);
-        font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Global Styling - Futuristic Dark Theme */
+    :root {
+        --bg-1: #030318;
+        --bg-2: #071030;
+        --accent: #7cf0ff;
+        --accent-2: #7a5cff;
+        --muted: rgba(255,255,255,0.7);
+        --glass-opacity: 0.06;
+        --glass-border: rgba(124,240,255,0.12);
+        --card-shadow: 0 20px 60px rgba(6, 10, 34, 0.7);
+        --mono: 'SF Pro Display', 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
     }
-    
+
+    .main {
+        background: radial-gradient(1200px 600px at 10% 20%, rgba(122,92,255,0.08), transparent),
+                    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        font-family: var(--mono);
+        color: #e7eefc;
+    }
+
     .stApp {
-        background: 
-            radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-            linear-gradient(145deg, #000000 0%, #0a0a0a 25%, #1a1a2e 50%, #16213e 75%, #0f0f23 100%);
-        color: #ffffff;
         min-height: 100vh;
+        color: var(--muted);
     }
     
     /* Header with Apple Glass Effect */
