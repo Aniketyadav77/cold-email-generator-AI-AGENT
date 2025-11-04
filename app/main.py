@@ -122,7 +122,7 @@ def inject_custom_css():
     }
     
     .title {
-        font-size: 3.4rem;
+        font-size: 3.6rem;
         font-weight: 800;
         background: linear-gradient(90deg, var(--accent), var(--accent-2));
         -webkit-background-clip: text;
@@ -136,13 +136,16 @@ def inject_custom_css():
     
     .subtitle {
         text-align: center;
-        font-size: 1.3rem;
+        font-size: 1.06rem;
         font-weight: 400;
         color: rgba(255, 255, 255, 0.7);
         margin-bottom: 2rem;
         letter-spacing: 0.01em;
         line-height: 1.4;
     }
+
+    /* Final spacing polish */
+    .main-header, .input-container, .result-container { margin-left: auto; margin-right: auto; max-width: 1100px; }
     
     /* Input Container with Apple Glass effect */
     .input-container {
