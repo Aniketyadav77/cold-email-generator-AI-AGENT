@@ -40,6 +40,25 @@ def inject_custom_css():
         min-height: 100vh;
         color: var(--muted);
     }
+
+    /* Floating action button for visual affordance (non-functional) */
+    .fab {
+        position: fixed !important;
+        right: 28px;
+        bottom: 28px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #041025;
+        box-shadow: 0 18px 50px rgba(122,92,255,0.2);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+        z-index: 9999;
+    }
+    .fab:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 28px 80px rgba(122,92,255,0.28); }
     
     /* Header with Apple Glass Effect */
     .main-header {
@@ -528,6 +547,7 @@ def create_modern_header():
     <div class="main-header">
         <div class="title">🗣️ Voice AI Agent</div>
         <div class="subtitle">Turn spoken ideas into professional outreach — upload audio or record and generate personalized messages</div>
+        <div class="fab" title="Help">❔</div>
     </div>
     """, unsafe_allow_html=True)
 
