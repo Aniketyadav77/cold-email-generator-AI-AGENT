@@ -105,22 +105,14 @@ def inject_custom_css():
     
     /* Input Container with Apple Glass effect */
     .input-container {
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.06) 0%,
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(0, 0, 0, 0.05) 100%
-            );
-        backdrop-filter: blur(30px) saturate(200%);
-        -webkit-backdrop-filter: blur(30px) saturate(200%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        padding: 2.5rem;
-        margin: 1.5rem 0;
-        box-shadow: 
-            0 8px 40px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.08),
-            0 0 0 1px rgba(59, 130, 246, 0.05);
+        background: linear-gradient(180deg, rgba(255,255,255,var(--glass-opacity)), rgba(255,255,255,0.01));
+        backdrop-filter: blur(28px) saturate(220%);
+        -webkit-backdrop-filter: blur(28px) saturate(220%);
+        border: 1px solid var(--glass-border);
+        border-radius: 14px;
+        padding: 1.8rem;
+        margin: 1.2rem 0;
+        box-shadow: var(--card-shadow), inset 0 1px 0 rgba(255,255,255,0.03);
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
