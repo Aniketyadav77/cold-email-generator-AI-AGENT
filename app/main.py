@@ -59,6 +59,28 @@ def inject_custom_css():
         z-index: 9999;
     }
     .fab:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 28px 80px rgba(122,92,255,0.28); }
+
+    /* Subtle animated backdrop accents */
+    .stApp::after {
+        content: '';
+        position: fixed;
+        left: -10%;
+        top: -20%;
+        width: 60vw;
+        height: 60vw;
+        background: radial-gradient(circle at 20% 20%, rgba(122,92,255,0.06), transparent 20%), radial-gradient(circle at 80% 80%, rgba(124,240,255,0.04), transparent 25%);
+        pointer-events: none;
+        z-index: 0;
+        transform: rotate(12deg);
+        animation: slowFloat 16s linear infinite;
+        mix-blend-mode: screen;
+    }
+
+    @keyframes slowFloat {
+        0% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(6px) rotate(4deg); }
+        100% { transform: translateY(0) rotate(0deg); }
+    }
     
     /* Header with Apple Glass Effect */
     .main-header {
