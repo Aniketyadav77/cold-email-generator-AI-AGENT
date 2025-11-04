@@ -384,6 +384,14 @@ def inject_custom_css():
         line-height: 1.5;
         font-size: 0.95rem;
     }
+
+    /* Responsive grid tweaks for feature showcase */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        align-items: start;
+    }
     
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
