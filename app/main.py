@@ -238,23 +238,15 @@ def inject_custom_css():
     
     /* Apple-style Result Container */
     .result-container {
-        background: 
-            linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.4) 0%,
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(0, 0, 0, 0.4) 100%
-            );
-        backdrop-filter: blur(40px) saturate(200%);
-        -webkit-backdrop-filter: blur(40px) saturate(200%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 2.5rem;
-        margin: 2rem 0;
-        box-shadow: 
-            0 16px 64px rgba(0, 0, 0, 0.6),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05),
-            0 0 0 1px rgba(59, 130, 246, 0.05);
-        animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+        background: linear-gradient(180deg, rgba(12,14,30,0.6), rgba(6,8,20,0.45));
+        backdrop-filter: blur(34px) saturate(180%);
+        -webkit-backdrop-filter: blur(34px) saturate(180%);
+        border: 1px solid rgba(124,92,255,0.06);
+        border-radius: 16px;
+        padding: 1.8rem;
+        margin: 1.6rem 0;
+        box-shadow: 0 30px 90px rgba(6, 8, 20, 0.7);
+        animation: fadeInUp 0.7s cubic-bezier(.2,1,.3,1);
         position: relative;
         overflow: hidden;
     }
@@ -276,7 +268,7 @@ def inject_custom_css():
     @keyframes slideInUp {
         from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(18px);
         }
         to {
             opacity: 1;
