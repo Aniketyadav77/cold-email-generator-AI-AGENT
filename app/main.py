@@ -187,12 +187,7 @@ def inject_custom_css():
     
     /* Apple-style Glass Button */
     .stButton > button {
-        background: 
-            linear-gradient(135deg, 
-                rgba(59, 130, 246, 0.8) 0%,
-                rgba(29, 78, 216, 0.9) 50%,
-                rgba(30, 58, 138, 0.8) 100%
-            ) !important;
+        background: linear-gradient(90deg, rgba(124,92,255,0.9), rgba(124,240,255,0.7)) !important;
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
         color: #ffffff !important;
@@ -206,7 +201,7 @@ def inject_custom_css():
             0 8px 32px rgba(59, 130, 246, 0.3),
             inset 0 1px 0 rgba(255, 255, 255, 0.2),
             0 0 0 1px rgba(59, 130, 246, 0.1) !important;
-        transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1) !important;
+        transition: transform 0.18s cubic-bezier(.2,.9,.2,1), box-shadow 0.18s ease !important;
         cursor: pointer !important;
         position: relative !important;
         overflow: hidden !important;
@@ -228,18 +223,9 @@ def inject_custom_css():
     }
     
     .stButton > button:hover {
-        transform: translateY(-4px) !important;
-        box-shadow: 
-            0 20px 60px rgba(59, 130, 246, 0.4),
-            inset 0 2px 0 rgba(255, 255, 255, 0.3),
-            0 0 0 1px rgba(59, 130, 246, 0.2) !important;
-        background: 
-            linear-gradient(135deg, 
-                rgba(59, 130, 246, 0.9) 0%,
-                rgba(29, 78, 216, 1) 50%,
-                rgba(30, 58, 138, 0.9) 100%
-            ) !important;
-        border-color: rgba(255, 255, 255, 0.3) !important;
+        transform: translateY(-6px) scale(1.02) !important;
+        box-shadow: 0 30px 90px rgba(122,92,255,0.25), inset 0 2px 0 rgba(255,255,255,0.06) !important;
+        border-color: rgba(255,255,255,0.22) !important;
     }
     
     .stButton > button:hover::before {
