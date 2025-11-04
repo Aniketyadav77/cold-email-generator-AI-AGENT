@@ -308,23 +308,16 @@ def inject_custom_css():
     
     /* Apple-style Feature Cards */
     .feature-card {
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.05) 0%,
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(0, 0, 0, 0.05) 100%
-            );
-        backdrop-filter: blur(25px) saturate(180%);
-        -webkit-backdrop-filter: blur(25px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 18px;
-        padding: 2rem 1.5rem;
-        margin: 1rem 0.5rem;
+        background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(122,92,255,0.02));
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(124,92,255,0.08);
+        border-radius: 14px;
+        padding: 1.6rem;
+        margin: 0.8rem 0.6rem;
         text-align: center;
-        box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+        box-shadow: 0 14px 44px rgba(4,6,20,0.6);
+        transition: transform 0.28s cubic-bezier(0.2,1,0.3,1), box-shadow 0.28s ease;
         position: relative;
         overflow: hidden;
     }
@@ -344,25 +337,21 @@ def inject_custom_css():
     }
     
     .feature-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 
-            0 20px 60px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.08),
-            0 0 0 1px rgba(59, 130, 246, 0.1);
-        border-color: rgba(255, 255, 255, 0.15);
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.08) 0%,
-                rgba(255, 255, 255, 0.04) 50%,
-                rgba(59, 130, 246, 0.02) 100%
-            );
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 30px 90px rgba(122,92,255,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+        border-color: rgba(124,92,255,0.16);
+        background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(124,92,255,0.04));
     }
     
     .feature-icon {
-        font-size: 2.5rem;
-        margin-bottom: 1.2rem;
-        filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
-        transition: all 0.3s ease;
+        font-size: 2.2rem;
+        margin-bottom: 0.8rem;
+        filter: drop-shadow(0 8px 30px rgba(124,92,255,0.18));
+        transition: transform 0.28s cubic-bezier(0.2,1,0.3,1), filter 0.28s ease;
+        display: inline-block;
+        padding: 8px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, rgba(124,92,255,0.06), rgba(124,240,255,0.02));
     }
     
     .feature-card:hover .feature-icon {
