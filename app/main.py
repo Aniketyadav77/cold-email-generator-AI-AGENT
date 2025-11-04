@@ -45,20 +45,17 @@ def inject_custom_css():
     .main-header {
         background: 
             linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.08) 0%,
-                rgba(255, 255, 255, 0.04) 50%,
-                rgba(0, 0, 0, 0.1) 100%
+                rgba(124, 92, 255, 0.06) 0%,
+                rgba(124, 240, 255, 0.03) 40%,
+                rgba(0, 0, 0, 0.06) 100%
             );
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
         border: 1px solid rgba(255, 255, 255, 0.125);
-        border-radius: 24px;
-        padding: 3rem 2rem;
-        margin: 2rem 0;
-        box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.6),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
-            0 0 0 1px rgba(59, 130, 246, 0.1);
+        border-radius: 18px;
+        padding: 2.2rem 1.6rem;
+        margin: 1.6rem 0;
+        box-shadow: var(--card-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 0 0 1px var(--glass-border);
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
@@ -84,15 +81,9 @@ def inject_custom_css():
     }
     
     .title {
-        font-size: 4rem;
+        font-size: 3.4rem;
         font-weight: 800;
-        background: linear-gradient(135deg, 
-            #ffffff 0%, 
-            #e0e7ff 25%,
-            #3b82f6 50%,
-            #1d4ed8 75%,
-            #ffffff 100%
-        );
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
