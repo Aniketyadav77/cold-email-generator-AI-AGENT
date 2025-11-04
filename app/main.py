@@ -16,39 +16,87 @@ def inject_custom_css():
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
-    /* Global Styling - Apple Dark Theme */
-    .main {
-        background: linear-gradient(145deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #000000 100%);
-        font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Global Styling - Futuristic Dark Theme */
+    :root {
+        --bg-1: #030318;
+        --bg-2: #071030;
+        --accent: #7cf0ff;
+        --accent-2: #7a5cff;
+        --muted: rgba(255,255,255,0.7);
+        --glass-opacity: 0.06;
+        --glass-border: rgba(124,240,255,0.12);
+        --card-shadow: 0 20px 60px rgba(6, 10, 34, 0.7);
+        --mono: 'SF Pro Display', 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
     }
-    
+
+    .main {
+        background: radial-gradient(1200px 600px at 10% 20%, rgba(122,92,255,0.08), transparent),
+                    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        font-family: var(--mono);
+        color: #e7eefc;
+    }
+
     .stApp {
-        background: 
-            radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-            linear-gradient(145deg, #000000 0%, #0a0a0a 25%, #1a1a2e 50%, #16213e 75%, #0f0f23 100%);
-        color: #ffffff;
         min-height: 100vh;
+        color: var(--muted);
+    }
+
+    /* Floating action button for visual affordance (non-functional) */
+    .fab {
+        position: fixed !important;
+        right: 28px;
+        bottom: 28px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #041025;
+        box-shadow: 0 18px 50px rgba(122,92,255,0.2);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+        z-index: 9999;
+    }
+    .fab:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 28px 80px rgba(122,92,255,0.28); }
+
+    /* Subtle animated backdrop accents */
+    .stApp::after {
+        content: '';
+        position: fixed;
+        left: -10%;
+        top: -20%;
+        width: 60vw;
+        height: 60vw;
+        background: radial-gradient(circle at 20% 20%, rgba(122,92,255,0.06), transparent 20%), radial-gradient(circle at 80% 80%, rgba(124,240,255,0.04), transparent 25%);
+        pointer-events: none;
+        z-index: 0;
+        transform: rotate(12deg);
+        animation: slowFloat 16s linear infinite;
+        mix-blend-mode: screen;
+    }
+
+    @keyframes slowFloat {
+        0% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(6px) rotate(4deg); }
+        100% { transform: translateY(0) rotate(0deg); }
     }
     
     /* Header with Apple Glass Effect */
     .main-header {
         background: 
             linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.08) 0%,
-                rgba(255, 255, 255, 0.04) 50%,
-                rgba(0, 0, 0, 0.1) 100%
+                rgba(124, 92, 255, 0.06) 0%,
+                rgba(124, 240, 255, 0.03) 40%,
+                rgba(0, 0, 0, 0.06) 100%
             );
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
         border: 1px solid rgba(255, 255, 255, 0.125);
-        border-radius: 24px;
-        padding: 3rem 2rem;
-        margin: 2rem 0;
-        box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.6),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
-            0 0 0 1px rgba(59, 130, 246, 0.1);
+        border-radius: 18px;
+        padding: 2.2rem 1.6rem;
+        margin: 1.6rem 0;
+        box-shadow: var(--card-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 0 0 1px var(--glass-border);
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
@@ -74,15 +122,9 @@ def inject_custom_css():
     }
     
     .title {
-        font-size: 4rem;
+        font-size: 3.6rem;
         font-weight: 800;
-        background: linear-gradient(135deg, 
-            #ffffff 0%, 
-            #e0e7ff 25%,
-            #3b82f6 50%,
-            #1d4ed8 75%,
-            #ffffff 100%
-        );
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -94,32 +136,27 @@ def inject_custom_css():
     
     .subtitle {
         text-align: center;
-        font-size: 1.3rem;
+        font-size: 1.06rem;
         font-weight: 400;
         color: rgba(255, 255, 255, 0.7);
         margin-bottom: 2rem;
         letter-spacing: 0.01em;
         line-height: 1.4;
     }
+
+    /* Final spacing polish */
+    .main-header, .input-container, .result-container { margin-left: auto; margin-right: auto; max-width: 1100px; }
     
     /* Input Container with Apple Glass effect */
     .input-container {
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.06) 0%,
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(0, 0, 0, 0.05) 100%
-            );
-        backdrop-filter: blur(30px) saturate(200%);
-        -webkit-backdrop-filter: blur(30px) saturate(200%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        padding: 2.5rem;
-        margin: 1.5rem 0;
-        box-shadow: 
-            0 8px 40px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.08),
-            0 0 0 1px rgba(59, 130, 246, 0.05);
+        background: linear-gradient(180deg, rgba(255,255,255,var(--glass-opacity)), rgba(255,255,255,0.01));
+        backdrop-filter: blur(28px) saturate(220%);
+        -webkit-backdrop-filter: blur(28px) saturate(220%);
+        border: 1px solid var(--glass-border);
+        border-radius: 14px;
+        padding: 1.8rem;
+        margin: 1.2rem 0;
+        box-shadow: var(--card-shadow), inset 0 1px 0 rgba(255,255,255,0.03);
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
@@ -194,12 +231,7 @@ def inject_custom_css():
     
     /* Apple-style Glass Button */
     .stButton > button {
-        background: 
-            linear-gradient(135deg, 
-                rgba(59, 130, 246, 0.8) 0%,
-                rgba(29, 78, 216, 0.9) 50%,
-                rgba(30, 58, 138, 0.8) 100%
-            ) !important;
+        background: linear-gradient(90deg, rgba(124,92,255,0.9), rgba(124,240,255,0.7)) !important;
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
         color: #ffffff !important;
@@ -213,7 +245,7 @@ def inject_custom_css():
             0 8px 32px rgba(59, 130, 246, 0.3),
             inset 0 1px 0 rgba(255, 255, 255, 0.2),
             0 0 0 1px rgba(59, 130, 246, 0.1) !important;
-        transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1) !important;
+        transition: transform 0.18s cubic-bezier(.2,.9,.2,1), box-shadow 0.18s ease !important;
         cursor: pointer !important;
         position: relative !important;
         overflow: hidden !important;
@@ -235,18 +267,9 @@ def inject_custom_css():
     }
     
     .stButton > button:hover {
-        transform: translateY(-4px) !important;
-        box-shadow: 
-            0 20px 60px rgba(59, 130, 246, 0.4),
-            inset 0 2px 0 rgba(255, 255, 255, 0.3),
-            0 0 0 1px rgba(59, 130, 246, 0.2) !important;
-        background: 
-            linear-gradient(135deg, 
-                rgba(59, 130, 246, 0.9) 0%,
-                rgba(29, 78, 216, 1) 50%,
-                rgba(30, 58, 138, 0.9) 100%
-            ) !important;
-        border-color: rgba(255, 255, 255, 0.3) !important;
+        transform: translateY(-6px) scale(1.02) !important;
+        box-shadow: 0 30px 90px rgba(122,92,255,0.25), inset 0 2px 0 rgba(255,255,255,0.06) !important;
+        border-color: rgba(255,255,255,0.22) !important;
     }
     
     .stButton > button:hover::before {
@@ -259,23 +282,15 @@ def inject_custom_css():
     
     /* Apple-style Result Container */
     .result-container {
-        background: 
-            linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.4) 0%,
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(0, 0, 0, 0.4) 100%
-            );
-        backdrop-filter: blur(40px) saturate(200%);
-        -webkit-backdrop-filter: blur(40px) saturate(200%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 2.5rem;
-        margin: 2rem 0;
-        box-shadow: 
-            0 16px 64px rgba(0, 0, 0, 0.6),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05),
-            0 0 0 1px rgba(59, 130, 246, 0.05);
-        animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+        background: linear-gradient(180deg, rgba(12,14,30,0.6), rgba(6,8,20,0.45));
+        backdrop-filter: blur(34px) saturate(180%);
+        -webkit-backdrop-filter: blur(34px) saturate(180%);
+        border: 1px solid rgba(124,92,255,0.06);
+        border-radius: 16px;
+        padding: 1.8rem;
+        margin: 1.6rem 0;
+        box-shadow: 0 30px 90px rgba(6, 8, 20, 0.7);
+        animation: fadeInUp 0.7s cubic-bezier(.2,1,.3,1);
         position: relative;
         overflow: hidden;
     }
@@ -297,7 +312,7 @@ def inject_custom_css():
     @keyframes slideInUp {
         from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(18px);
         }
         to {
             opacity: 1;
@@ -329,23 +344,16 @@ def inject_custom_css():
     
     /* Apple-style Feature Cards */
     .feature-card {
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.05) 0%,
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(0, 0, 0, 0.05) 100%
-            );
-        backdrop-filter: blur(25px) saturate(180%);
-        -webkit-backdrop-filter: blur(25px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 18px;
-        padding: 2rem 1.5rem;
-        margin: 1rem 0.5rem;
+        background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(122,92,255,0.02));
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(124,92,255,0.08);
+        border-radius: 14px;
+        padding: 1.6rem;
+        margin: 0.8rem 0.6rem;
         text-align: center;
-        box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+        box-shadow: 0 14px 44px rgba(4,6,20,0.6);
+        transition: transform 0.28s cubic-bezier(0.2,1,0.3,1), box-shadow 0.28s ease;
         position: relative;
         overflow: hidden;
     }
@@ -365,25 +373,21 @@ def inject_custom_css():
     }
     
     .feature-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 
-            0 20px 60px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.08),
-            0 0 0 1px rgba(59, 130, 246, 0.1);
-        border-color: rgba(255, 255, 255, 0.15);
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.08) 0%,
-                rgba(255, 255, 255, 0.04) 50%,
-                rgba(59, 130, 246, 0.02) 100%
-            );
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 30px 90px rgba(122,92,255,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+        border-color: rgba(124,92,255,0.16);
+        background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(124,92,255,0.04));
     }
     
     .feature-icon {
-        font-size: 2.5rem;
-        margin-bottom: 1.2rem;
-        filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
-        transition: all 0.3s ease;
+        font-size: 2.2rem;
+        margin-bottom: 0.8rem;
+        filter: drop-shadow(0 8px 30px rgba(124,92,255,0.18));
+        transition: transform 0.28s cubic-bezier(0.2,1,0.3,1), filter 0.28s ease;
+        display: inline-block;
+        padding: 8px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, rgba(124,92,255,0.06), rgba(124,240,255,0.02));
     }
     
     .feature-card:hover .feature-icon {
@@ -404,6 +408,14 @@ def inject_custom_css():
         font-weight: 400;
         line-height: 1.5;
         font-size: 0.95rem;
+    }
+
+    /* Responsive grid tweaks for feature showcase */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        align-items: start;
     }
     
     /* Hide Streamlit branding */
@@ -568,6 +580,7 @@ def create_modern_header():
     <div class="main-header">
         <div class="title">🗣️ Voice AI Agent</div>
         <div class="subtitle">Turn spoken ideas into professional outreach — upload audio or record and generate personalized messages</div>
+        <div class="fab" title="Help">❔</div>
     </div>
     """, unsafe_allow_html=True)
 
