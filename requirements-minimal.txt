@@ -1,17 +1,17 @@
-# Core AI & LangChain
+# Core AI & LangChain (minimal working version)
 langchain>=0.2.14
 langchain-community>=0.2.12
 langchain-groq>=0.1.9
 langchain-core>=0.2.0
 
-# Web Framework & UI
+# Web Framework
 streamlit>=1.35.0
 
 # Data Processing & Storage
 pandas>=2.0.0
 chromadb>=0.5.0
 
-# Web Scraping & HTTP
+# Web Scraping & HTTP (essential)
 beautifulsoup4>=4.12.0
 lxml>=4.9.0
 requests>=2.31.0
